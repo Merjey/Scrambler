@@ -13,7 +13,6 @@ import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.Properties;
 import java.util.Random;
-import java.util.concurrent.ForkJoinPool;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
@@ -22,8 +21,6 @@ public class Core {
 	private static int key[] = new int[5];
 	private static int inclusions[] = new int[2];
 	private static int maxpice;
-	private static int cmp = 1;
-	private static ForkJoinPool fjp = new ForkJoinPool(Runtime.getRuntime().availableProcessors()*cmp);
 	
 	private static void keyExtraction() throws IOException {
 		Properties keys = new Properties();
@@ -203,12 +200,12 @@ public class Core {
 	
 	private static ArrayList<Integer> doShuffle(ArrayList<Integer> data, int key) throws InterruptedException {
 		ParallelOperations task = new ParallelOperations(data, 0, data.size(), key, maxpice, true);
-		return fjp.invoke(task);	
+		return task.invoke();	
 	}
 	
 	private static ArrayList<Integer> undoShuffle(ArrayList<Integer> data, int key) throws InterruptedException {
 		ParallelOperations task = new ParallelOperations(data, 0, data.size(), key, maxpice, false);
-		return fjp.invoke(task);	
+		return task.invoke();	
 	}
 
 }
