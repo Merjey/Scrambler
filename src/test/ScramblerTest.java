@@ -66,6 +66,27 @@ public class ScramblerTest {
         
     }
  
+	@SuppressWarnings("unchecked")
+	@Test
+    public void stuffingTest() {
+        try {
+			Method stuffing = core.getDeclaredMethod("doStuffing", new Class[] {ArrayList.class, int.class, int.class});
+			stuffing.setAccessible(true);
+			Method unstuffing = core.getDeclaredMethod("undoStuffing", new Class[] {ArrayList.class, int.class, int.class});
+			unstuffing.setAccessible(true);
+			ArrayList<Integer> a = new ArrayList<>();
+			a.addAll(data);
+			data = (ArrayList<Integer>) stuffing.invoke(null, data, rndKey, incl);
+			ArrayList<Integer> b = new ArrayList<>();
+			b.addAll(data);
+			data = (ArrayList<Integer>) unstuffing.invoke(null, data, rndKey, incl);
+			assertTrue(data.equals(a));
+			assertTrue(b.size() == a.size() + incl);
+		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			fail("Can't take access to required method.");
+		}
+        
+    }
  
     public static void main(String[] args) {
         JUnitCore juc = new JUnitCore();
