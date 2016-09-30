@@ -69,6 +69,7 @@ public class ScramblerTest {
  
     public static void main(String[] args) {
         JUnitCore juc = new JUnitCore();
+        juc.addListener(new TestListener());
         juc.run(ScramblerTest.class);
     }
 
