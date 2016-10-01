@@ -20,7 +20,7 @@ import java.util.zip.GZIPOutputStream;
 public class Core {
 	private static int key[] = new int[5];
 	private static int inclusions[] = new int[2];
-	private static int maxpice;
+	private static int maxpiece;
 	
 	private static void keyExtraction() throws IOException {
 		Properties keys = new Properties();
@@ -31,7 +31,7 @@ public class Core {
 		for(int i = 0; i < inclusions.length; i++){
 			inclusions[i] = Integer.parseInt(keys.getProperty("inclusions." + i));
 		}
-		maxpice = Integer.parseInt(keys.getProperty("maxpice"));
+		maxpiece = Integer.parseInt(keys.getProperty("maxpiece"));
 	}
 	
 	private static ArrayList<Integer> openFile(File file) throws IOException {
@@ -199,12 +199,12 @@ public class Core {
 	}
 	
 	private static ArrayList<Integer> doShuffle(ArrayList<Integer> data, int key) throws InterruptedException {
-		ParallelOperations task = new ParallelOperations(data, 0, data.size(), key, maxpice, true);
+		ParallelOperations task = new ParallelOperations(data, 0, data.size(), key, maxpiece, true);
 		return task.invoke();	
 	}
 	
 	private static ArrayList<Integer> undoShuffle(ArrayList<Integer> data, int key) throws InterruptedException {
-		ParallelOperations task = new ParallelOperations(data, 0, data.size(), key, maxpice, false);
+		ParallelOperations task = new ParallelOperations(data, 0, data.size(), key, maxpiece, false);
 		return task.invoke();	
 	}
 

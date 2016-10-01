@@ -29,7 +29,7 @@ public class ScramblerTest {
 			fail("Class \"scrambler.core.Core\" not found.");
 		}
         try {
-			f = core.getDeclaredField("maxpice");
+			f = core.getDeclaredField("maxpiece");
 			f.setAccessible(true);
 	        f.set(int.class, maxL);
 		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
