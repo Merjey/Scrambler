@@ -33,7 +33,7 @@ public class ScramblerTest {
 			f.setAccessible(true);
 	        f.set(int.class, maxL);
 		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
-			fail("Class \"scrambler.core.Core\" not found.");
+			fail("Can't take access to required field.");
 		}
     }
 	
