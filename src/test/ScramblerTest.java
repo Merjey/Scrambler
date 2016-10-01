@@ -62,8 +62,7 @@ public class ScramblerTest {
 			assertFalse(data.equals(b));
 		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			fail("Can't take access to required method.");
-		}
-        
+		} 
     }
  
 	@SuppressWarnings("unchecked")
@@ -85,7 +84,27 @@ public class ScramblerTest {
 		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			fail("Can't take access to required method.");
 		}
-        
+    }
+	
+	@SuppressWarnings("unchecked")
+	@Test
+    public void zipTest() {
+        try {
+			Method zip = core.getDeclaredMethod("putToZip", new Class[] {ArrayList.class});
+			zip.setAccessible(true);
+			Method unzip = core.getDeclaredMethod("getFromZip", new Class[] {ArrayList.class});
+			unzip.setAccessible(true);
+			ArrayList<Integer> a = new ArrayList<>();
+			a.addAll(data);
+			data = (ArrayList<Integer>) zip.invoke(null, data);
+			ArrayList<Integer> b = new ArrayList<>();
+			b.addAll(data);
+			data = (ArrayList<Integer>) unzip.invoke(null, data);
+			assertTrue(data.equals(a));
+			assertFalse(data.equals(b));
+		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			fail("Can't take access to required method.");
+		}
     }
  
     public static void main(String[] args) {
@@ -93,5 +112,4 @@ public class ScramblerTest {
         juc.addListener(new TestListener());
         juc.run(ScramblerTest.class);
     }
-
 }
