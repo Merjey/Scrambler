@@ -9,6 +9,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import scrambler.gui.Controller;
 
+/**
+ * @version 2.0 2016-10-03
+ * @author Evgeniy Merjey
+ */
 public class MainClass extends Application {
 	private Stage primaryStage;
     private AnchorPane rootLayout;
@@ -18,6 +22,7 @@ public class MainClass extends Application {
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Scrambler");
+        this.primaryStage.setResizable(false);
 		try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainClass.class.getResource("gui/Scrambler.fxml"));

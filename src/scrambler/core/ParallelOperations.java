@@ -6,6 +6,7 @@ import java.util.ListIterator;
 import java.util.Random;
 import java.util.concurrent.RecursiveTask;
 
+
 @SuppressWarnings("serial")
 public class ParallelOperations extends RecursiveTask<ArrayList<Integer>> {
 	private int maxL;
