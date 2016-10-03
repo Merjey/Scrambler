@@ -72,7 +72,8 @@ public class Controller {
 			alert.setContentText(s);
 			alert.showAndWait();
 		} else {
-			String s = String.format("%s was not completed due to an error.", operation);
+			String s = String.format("%s was not completed due to an error. Perhaps you try to encrypt a file larger "+
+					"than 50MB, or decipher an unencrypted file or do not have access to the file.", operation);
 			alert = new Alert(AlertType.ERROR);
 			alert.initOwner(mainClass.getPrimaryStage());
 			alert.setTitle("Scrambler");
