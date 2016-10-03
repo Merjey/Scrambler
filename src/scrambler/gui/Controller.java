@@ -45,6 +45,17 @@ public class Controller {
 	private File openFile() {
 		FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(mainClass.getPrimaryStage());
+        if (file.length()>54000000){
+        	Alert alert;
+        	String s = "Are supported only files up to 50 MB";
+			alert = new Alert(AlertType.WARNING);
+			alert.initOwner(mainClass.getPrimaryStage());
+			alert.setTitle("Scrambler");
+			alert.setHeaderText("Too big file");
+			alert.setContentText(s);
+			alert.showAndWait();
+        	return null;
+		}
         return file;
 	}
 	
@@ -72,8 +83,8 @@ public class Controller {
 			alert.setContentText(s);
 			alert.showAndWait();
 		} else {
-			String s = String.format("%s was not completed due to an error. Perhaps you try to encrypt a file larger "+
-					"than 50MB, or decipher an unencrypted file or do not have access to the file.", operation);
+			String s = String.format("%s was not completed due to an error. Perhaps you try to "+
+					"decipher an unencrypted file or do not have access to the file.", operation);
 			alert = new Alert(AlertType.ERROR);
 			alert.initOwner(mainClass.getPrimaryStage());
 			alert.setTitle("Scrambler");

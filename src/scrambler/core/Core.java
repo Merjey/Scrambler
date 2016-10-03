@@ -60,9 +60,6 @@ public class Core {
 		try {
 			keyExtraction();
 			ArrayList<Integer> data = openFile(file);
-			if (data.size()>54000000){
-				throw new Exception("It supports files only up to 50 MB");
-			}
 			data=doShuffle(data, key[0]);
 			data=doStuffing(data, key[1], inclusions[0]);
 			data=doShuffle(data, key[2]);
