@@ -65,6 +65,10 @@ public class Controller {
 		decrypt.setDisable(true);
 	}
 	
+	/**
+	  * @param operation Name of operation: "Encryption" or "Decryption".
+	  * @param success True if the operation completed successfully. False otherwise.
+	  */
 	private void reactivateButtons(String operation, boolean success) {
 		ellapsedTime=System.nanoTime()/1e9-startTime;
 		showSummary(operation, success);
@@ -72,6 +76,10 @@ public class Controller {
 		decrypt.setDisable(false);
 	}
 	
+	/**
+	  * @param operation Name of operation: "Encryption" or "Decryption".
+	  * @param success True if the operation completed successfully. False otherwise.
+	  */
 	private void showSummary(String operation, boolean success) {
 		Alert alert;
 		if (success) {

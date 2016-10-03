@@ -6,7 +6,6 @@ import java.util.ListIterator;
 import java.util.Random;
 import java.util.concurrent.RecursiveTask;
 
-
 @SuppressWarnings("serial")
 public class ParallelOperations extends RecursiveTask<ArrayList<Integer>> {
 	private int maxL;
@@ -15,6 +14,15 @@ public class ParallelOperations extends RecursiveTask<ArrayList<Integer>> {
 	private int key;
 	private boolean encryption;
 	
+	/**
+	  * @param data An array of data to shuffling in the encryption or recovery in the decryption. 
+	  * @param s Data processing in subtask starts at this index.
+	  * @param e Data processing end upon reaching this index.
+	  * @param key Entry point of random number generator.
+	  * @param ml If the file size is larger than {@code ml}, the file is divided in half, 
+	  * then each part is divided again in half, until the size of each part becomes less than {@code ml}.
+	  * @param enc True if encryption of file is in progress. False if decryption is in progress.
+	  */
 	public ParallelOperations(ArrayList<Integer> data, int s, int e, int key, int ml, boolean enc) {
 		maxL = ml;
 		this.data = data;
@@ -24,6 +32,9 @@ public class ParallelOperations extends RecursiveTask<ArrayList<Integer>> {
 		encryption = enc;
 	}
 	
+	/**
+	 * This method does all the work for shuffling data and restore them.
+	 */
 	protected ArrayList<Integer> compute() {
 		ArrayList<Integer> result = new ArrayList<>();
 		if ((end - start) < maxL) {

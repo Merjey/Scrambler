@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import scrambler.gui.Controller;
 
 /**
+ * This program is designed to encrypt and then decrypt the small (up to 50MB) files.
  * @version 2.0 2016-10-03
  * @author Evgeniy Merjey
  */

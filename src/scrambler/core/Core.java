@@ -56,6 +56,9 @@ public class Core {
 		} finally {}
 	}
 	
+	/**
+	 * @return True if encryption was successfully. False if an exception has occurred.
+	 */
 	public static boolean encryptFile(File file) {
 		try {
 			keyExtraction();
@@ -74,6 +77,9 @@ public class Core {
 		return true;
 	}
 	
+	/**
+	 * @return True if decryption was successfully. False if an exception has occurred.
+	 */
 	public static boolean decryptFile(File file) {
 		try {
 			keyExtraction();
