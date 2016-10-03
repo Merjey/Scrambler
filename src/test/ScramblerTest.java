@@ -106,7 +106,10 @@ public class ScramblerTest {
 			fail("Can't take access to required method.");
 		}
     }
- 
+
+	/**
+	 * This method is designed to run a unit test as a standard Java application. This is not recommended.
+	 */
     public static void main(String[] args) {
         JUnitCore juc = new JUnitCore();
         juc.addListener(new TestListener());

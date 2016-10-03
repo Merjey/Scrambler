@@ -4,6 +4,9 @@ import org.junit.runner.Description;
 import org.junit.runner.notification.RunListener;
 import org.junit.runner.notification.Failure;
 
+/**
+ * @see ScramblerTest#main
+ */
 public class TestListener extends RunListener{
 	@Override
     public void testStarted(Description desc) {
