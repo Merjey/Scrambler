@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.ListIterator;
 import java.util.Properties;
 import java.util.Random;
@@ -34,8 +35,8 @@ public class Core {
 		maxpiece = Integer.parseInt(keys.getProperty("maxpiece"));
 	}
 	
-	private static ArrayList<Integer> openFile(File file) throws IOException {
-		ArrayList<Integer> data = new ArrayList<>();
+	private static List<Integer> openFile(File file) throws IOException {
+		List<Integer> data = new ArrayList<>();
 		try (BufferedInputStream inBuff = new BufferedInputStream (new FileInputStream(file))){
 			while (true) {
 				int byteValue = inBuff.read();
@@ -46,7 +47,7 @@ public class Core {
 		return data;
 	}
 	
-	private static void saveFile(File file, ArrayList<Integer> data) throws IOException {
+	private static void saveFile(File file, List<Integer> data) throws IOException {
 		Iterator<Integer> it = data.iterator();
 		try (BufferedOutputStream outBuff = new BufferedOutputStream (new FileOutputStream(file))) {
 			while (it.hasNext()) {
@@ -62,7 +63,7 @@ public class Core {
 	public static boolean encryptFile(File file) {
 		try {
 			keyExtraction();
-			ArrayList<Integer> data = openFile(file);
+			List<Integer> data = openFile(file);
 			data=doShuffle(data, key[0]);
 			data=doStuffing(data, key[1], inclusions[0]);
 			data=doShuffle(data, key[2]);
@@ -83,7 +84,7 @@ public class Core {
 	public static boolean decryptFile(File file) {
 		try {
 			keyExtraction();
-			ArrayList<Integer> data = openFile(file);
+			List<Integer> data = openFile(file);
 			int datasize = data.size();
 			for (int i=1; i<=5; i++){
 				if (data.get(datasize-i)!=(36-i)){
@@ -104,24 +105,24 @@ public class Core {
 		return true;
 	}
 	
-	private static ArrayList<Integer> addSign(ArrayList<Integer> data) {
-		ArrayList<Integer> temp = new ArrayList<>();
+	private static List<Integer> addSign(List<Integer> data) {
+		List<Integer> temp = new ArrayList<>();
 		temp.addAll(data);
 		for (int i = 1; i <= 5; i++) temp.add(30+i);
 		return temp;
 	}
 	
-	private static ArrayList<Integer> removeSign(ArrayList<Integer> data) {
-		ArrayList<Integer> temp = new ArrayList<>();
+	private static List<Integer> removeSign(List<Integer> data) {
+		List<Integer> temp = new ArrayList<>();
 		temp.addAll(data);
 		int datasize=data.size();
 		for (int i = 1; i <= 5; i++) temp.remove(datasize-i);
 		return temp;
 	}
 	
-	private static ArrayList<Integer> doStuffing(ArrayList<Integer> data, int key, int items) {
-		ArrayList<Integer> temp = new ArrayList<>();
-		ArrayList<Integer> randArray = new ArrayList<>();
+	private static List<Integer> doStuffing(List<Integer> data, int key, int items) {
+		List<Integer> temp = new ArrayList<>();
+		List<Integer> randArray = new ArrayList<>();
 		Random rnd = new Random(key);
 		Random sr= new Random();
 		int datasize = data.size();
@@ -139,9 +140,9 @@ public class Core {
 		return temp;
 	}
 	
-	private static ArrayList<Integer> undoStuffing(ArrayList<Integer> data, int key, int items) {
-		ArrayList<Integer> temp = new ArrayList<>();
-		ArrayList<Integer> randArray = new ArrayList<>();
+	private static List<Integer> undoStuffing(List<Integer> data, int key, int items) {
+		List<Integer> temp = new ArrayList<>();
+		List<Integer> randArray = new ArrayList<>();
 		Random rnd = new Random(key);
 		int datasize=data.size()-items;
 		temp.addAll(data);
@@ -158,8 +159,8 @@ public class Core {
 		return temp;
 	}
 	
-	private static ArrayList<Integer> putToZip(ArrayList<Integer> data) throws IOException {
-		ArrayList<Integer> temp = new ArrayList<>();
+	private static List<Integer> putToZip(List<Integer> data) throws IOException {
+		List<Integer> temp = new ArrayList<>();
 		File tempFile = File.createTempFile("temp", ".dat");
         tempFile.deleteOnExit();
         BufferedOutputStream zipper = new BufferedOutputStream(new GZIPOutputStream (new FileOutputStream(tempFile)));
@@ -181,8 +182,8 @@ public class Core {
 		return temp;
 	}
 	
-	private static ArrayList<Integer> getFromZip(ArrayList<Integer> data) throws IOException {
-		ArrayList<Integer> temp = new ArrayList<>();
+	private static List<Integer> getFromZip(List<Integer> data) throws IOException {
+		List<Integer> temp = new ArrayList<>();
 		File tempFile = File.createTempFile("temp", ".dat");
         tempFile.deleteOnExit();
         BufferedOutputStream outBuff = new BufferedOutputStream (new FileOutputStream(tempFile));
@@ -204,12 +205,12 @@ public class Core {
 		return temp;
 	}
 	
-	private static ArrayList<Integer> doShuffle(ArrayList<Integer> data, int key) throws InterruptedException {
+	private static List<Integer> doShuffle(List<Integer> data, int key) throws InterruptedException {
 		ParallelOperations task = new ParallelOperations(data, 0, data.size(), key, maxpiece, true);
 		return task.invoke();	
 	}
 	
-	private static ArrayList<Integer> undoShuffle(ArrayList<Integer> data, int key) throws InterruptedException {
+	private static List<Integer> undoShuffle(List<Integer> data, int key) throws InterruptedException {
 		ParallelOperations task = new ParallelOperations(data, 0, data.size(), key, maxpiece, false);
 		return task.invoke();	
 	}

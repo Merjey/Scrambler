@@ -6,6 +6,7 @@ import org.junit.BeforeClass;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.lang.reflect.*;
 
@@ -52,10 +53,10 @@ public class ScramblerTest {
 			shuffle.setAccessible(true);
 			Method unshuffle = core.getDeclaredMethod("undoShuffle", new Class[] {ArrayList.class, int.class});
 			unshuffle.setAccessible(true);
-			ArrayList<Integer> a = new ArrayList<>();
+			List<Integer> a = new ArrayList<>();
 			a.addAll(data);
 			data = (ArrayList<Integer>) shuffle.invoke(null, data, rndKey);
-			ArrayList<Integer> b = new ArrayList<>();
+			List<Integer> b = new ArrayList<>();
 			b.addAll(data);
 			data = (ArrayList<Integer>) unshuffle.invoke(null, data, rndKey);
 			assertTrue(data.equals(a));
@@ -73,10 +74,10 @@ public class ScramblerTest {
 			stuffing.setAccessible(true);
 			Method unstuffing = core.getDeclaredMethod("undoStuffing", new Class[] {ArrayList.class, int.class, int.class});
 			unstuffing.setAccessible(true);
-			ArrayList<Integer> a = new ArrayList<>();
+			List<Integer> a = new ArrayList<>();
 			a.addAll(data);
 			data = (ArrayList<Integer>) stuffing.invoke(null, data, rndKey, incl);
-			ArrayList<Integer> b = new ArrayList<>();
+			List<Integer> b = new ArrayList<>();
 			b.addAll(data);
 			data = (ArrayList<Integer>) unstuffing.invoke(null, data, rndKey, incl);
 			assertTrue(data.equals(a));
@@ -94,10 +95,10 @@ public class ScramblerTest {
 			zip.setAccessible(true);
 			Method unzip = core.getDeclaredMethod("getFromZip", new Class[] {ArrayList.class});
 			unzip.setAccessible(true);
-			ArrayList<Integer> a = new ArrayList<>();
+			List<Integer> a = new ArrayList<>();
 			a.addAll(data);
 			data = (ArrayList<Integer>) zip.invoke(null, data);
-			ArrayList<Integer> b = new ArrayList<>();
+			List<Integer> b = new ArrayList<>();
 			b.addAll(data);
 			data = (ArrayList<Integer>) unzip.invoke(null, data);
 			assertTrue(data.equals(a));

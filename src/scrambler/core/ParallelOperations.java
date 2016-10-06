@@ -2,14 +2,15 @@ package scrambler.core;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.ListIterator;
 import java.util.Random;
 import java.util.concurrent.RecursiveTask;
 
 @SuppressWarnings("serial")
-public class ParallelOperations extends RecursiveTask<ArrayList<Integer>> {
+public class ParallelOperations extends RecursiveTask<List<Integer>> {
 	private int maxL;
-	private ArrayList<Integer> data;
+	private List<Integer> data;
 	private int start, end;
 	private int key;
 	private boolean encryption;
@@ -23,7 +24,7 @@ public class ParallelOperations extends RecursiveTask<ArrayList<Integer>> {
 	  * then each part is divided again in half, until the size of each part becomes less than {@code ml}.
 	  * @param enc True if encryption of file is in progress. False if decryption is in progress.
 	  */
-	public ParallelOperations(ArrayList<Integer> data, int s, int e, int key, int ml, boolean enc) {
+	public ParallelOperations(List<Integer> data, int s, int e, int key, int ml, boolean enc) {
 		maxL = ml;
 		this.data = data;
 		start = s;
@@ -35,13 +36,13 @@ public class ParallelOperations extends RecursiveTask<ArrayList<Integer>> {
 	/**
 	 * This method does all the work for shuffling data and restore them.
 	 */
-	protected ArrayList<Integer> compute() {
-		ArrayList<Integer> result = new ArrayList<>();
+	protected List<Integer> compute() {
+		List<Integer> result = new ArrayList<>();
 		if ((end - start) < maxL) {
 			Random rnd = new Random(key);
-			ArrayList<Integer> dividedData = new ArrayList<>();
+			List<Integer> dividedData = new ArrayList<>();
 			for (int i=start; i<end; i++) dividedData.add(data.get(i));
-			ArrayList<Integer> randArray = new ArrayList<>();
+			List<Integer> randArray = new ArrayList<>();
 			int divDataSize = dividedData.size();
 			for (int i=0; i<divDataSize; i++) randArray.add(rnd.nextInt(divDataSize-i));
 			if (encryption) {
