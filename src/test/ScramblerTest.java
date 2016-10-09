@@ -18,8 +18,7 @@ public class ScramblerTest {
 	private static int rndKey = 1024;
 	private static int incl = 36;
 	private static ArrayList<Integer> data = new ArrayList<>();
-	@SuppressWarnings("rawtypes")
-	private static Class core;
+	private static Class<?> core;
 	private static Field f;
 	
 	@BeforeClass
@@ -109,7 +108,7 @@ public class ScramblerTest {
     }
 
 	/**
-	 * This method is designed to run a unit test as a standard Java application. This is not recommended.
+	 * This method is designed to run a unit test as a standard Java application. It is not recommended.
 	 */
     public static void main(String[] args) {
         JUnitCore juc = new JUnitCore();
