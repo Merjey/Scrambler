@@ -13,8 +13,8 @@ import java.lang.reflect.*;
 import org.junit.runner.JUnitCore;
 
 public class ScramblerTest {
-	private static int maxL = 200;
-	private static int dataN = 300;
+	private static int maxL = 5000;
+	private static int dataN = 30000000;
 	private static int rndKey = 1024;
 	private static int incl = 36;
 	private static ArrayList<Integer> data = new ArrayList<>();
@@ -48,9 +48,9 @@ public class ScramblerTest {
 	@Test
     public void shuffleTest() {
         try {
-			Method shuffle = core.getDeclaredMethod("doShuffle", new Class[] {ArrayList.class, int.class});
+			Method shuffle = core.getDeclaredMethod("doShuffle", new Class[] {List.class, int.class});
 			shuffle.setAccessible(true);
-			Method unshuffle = core.getDeclaredMethod("undoShuffle", new Class[] {ArrayList.class, int.class});
+			Method unshuffle = core.getDeclaredMethod("undoShuffle", new Class[] {List.class, int.class});
 			unshuffle.setAccessible(true);
 			List<Integer> a = new ArrayList<>();
 			a.addAll(data);
@@ -69,9 +69,9 @@ public class ScramblerTest {
 	@Test
     public void stuffingTest() {
         try {
-			Method stuffing = core.getDeclaredMethod("doStuffing", new Class[] {ArrayList.class, int.class, int.class});
+			Method stuffing = core.getDeclaredMethod("doStuffing", new Class[] {List.class, int.class, int.class});
 			stuffing.setAccessible(true);
-			Method unstuffing = core.getDeclaredMethod("undoStuffing", new Class[] {ArrayList.class, int.class, int.class});
+			Method unstuffing = core.getDeclaredMethod("undoStuffing", new Class[] {List.class, int.class, int.class});
 			unstuffing.setAccessible(true);
 			List<Integer> a = new ArrayList<>();
 			a.addAll(data);
@@ -90,9 +90,9 @@ public class ScramblerTest {
 	@Test
     public void zipTest() {
         try {
-			Method zip = core.getDeclaredMethod("putToZip", new Class[] {ArrayList.class});
+			Method zip = core.getDeclaredMethod("putToZip", new Class[] {List.class});
 			zip.setAccessible(true);
-			Method unzip = core.getDeclaredMethod("getFromZip", new Class[] {ArrayList.class});
+			Method unzip = core.getDeclaredMethod("getFromZip", new Class[] {List.class});
 			unzip.setAccessible(true);
 			List<Integer> a = new ArrayList<>();
 			a.addAll(data);
