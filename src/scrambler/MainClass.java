@@ -20,10 +20,10 @@ public class MainClass extends Application {
     private Controller controller;
 
 	@Override
-	public void start(Stage primaryStage) {
-		this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("Scrambler");
-        this.primaryStage.setResizable(false);
+	public void start(Stage pS) {
+		primaryStage = pS;
+        primaryStage.setTitle("Scrambler");
+        primaryStage.setResizable(false);
 		try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainClass.class.getResource("gui/Scrambler.fxml"));
@@ -39,7 +39,7 @@ public class MainClass extends Application {
 	}
 	
 	public Stage getPrimaryStage() {
-		return this.primaryStage;
+		return primaryStage;
 	}
 
 	public static void main(String[] args) {
