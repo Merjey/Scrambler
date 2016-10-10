@@ -15,7 +15,7 @@ public class ScramblerTest {
 	private static int dataN = 300;
 	private static int rndKey = 1024;
 	private static int incl = 36;
-	private static ArrayList<Integer> data = new ArrayList<>();
+	private static List<Integer> data = new ArrayList<>();
 	private static Class<?> core;
 	private static Field f;
 	

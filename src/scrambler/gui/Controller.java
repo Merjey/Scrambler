@@ -102,8 +102,8 @@ public class Controller {
 		}
 	}
 	
-	public void setMainClass(MainClass mainClass) {
-		this.mainClass=mainClass;
+	public void setMainClass(MainClass mC) {
+		mainClass=mC;
 	}
 
 }
