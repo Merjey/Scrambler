@@ -10,11 +10,9 @@ import java.util.List;
 import java.util.Random;
 import java.lang.reflect.*;
 
-import org.junit.runner.JUnitCore;
-
 public class ScramblerTest {
-	private static int maxL = 5000;
-	private static int dataN = 30000000;
+	private static int maxL = 200;
+	private static int dataN = 300;
 	private static int rndKey = 1024;
 	private static int incl = 36;
 	private static ArrayList<Integer> data = new ArrayList<>();
@@ -105,14 +103,5 @@ public class ScramblerTest {
 		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			fail("Can't take access to required method.");
 		}
-    }
-
-	/**
-	 * This method is designed to run a unit test as a standard Java application. It is not recommended.
-	 */
-    public static void main(String[] args) {
-        JUnitCore juc = new JUnitCore();
-        juc.addListener(new TestListener());
-        juc.run(ScramblerTest.class);
     }
 }
