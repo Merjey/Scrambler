@@ -10,6 +10,7 @@ local.properties
 .loadpath
 .recommenders
 build/
+.fxbuild
 build.fxbuild
 
 # Eclipse Core
