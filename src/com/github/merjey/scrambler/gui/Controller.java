@@ -1,16 +1,17 @@
-package scrambler.gui;
+package com.github.merjey.scrambler.gui;
+
+import static com.github.merjey.scrambler.core.Core.*;
 
 import java.io.File;
 import java.util.Locale;
+
+import com.github.merjey.scrambler.MainClass;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
-
-import scrambler.MainClass;
-import static scrambler.core.Core.*;
 
 public class Controller {
 	@FXML

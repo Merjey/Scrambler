@@ -1,13 +1,14 @@
-package scrambler;
+package com.github.merjey.scrambler;
 
 import java.io.IOException;
+
+import com.github.merjey.scrambler.gui.Controller;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import scrambler.gui.Controller;
 
 /**
  * This program is designed to encrypt and then decrypt the small (up to 50MB) files.

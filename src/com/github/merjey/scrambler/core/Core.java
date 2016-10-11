@@ -1,4 +1,4 @@
-package scrambler.core;
+package com.github.merjey.scrambler.core;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

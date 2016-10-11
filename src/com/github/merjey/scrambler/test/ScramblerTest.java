@@ -1,4 +1,4 @@
-package test;
+package com.github.merjey.scrambler.test;
 
 import org.junit.Test;
 import org.junit.Before;
@@ -11,10 +11,10 @@ import java.util.Random;
 import java.lang.reflect.*;
 
 public class ScramblerTest {
-	private static int maxL = 200;
-	private static int dataN = 300;
-	private static int rndKey = 1024;
-	private static int incl = 36;
+	private static final int MAXL = 300;
+	private static final int DATAN = 2500000;
+	private static final int RNDKEY = 1024;
+	private static final int INCL = 36;
 	private static List<Integer> data = new ArrayList<>();
 	private static Class<?> core;
 	private static Field f;
@@ -22,14 +22,14 @@ public class ScramblerTest {
 	@BeforeClass
     public static void loadCore() {
         try {
-			core = Class.forName("scrambler.core.Core");
+			core = Class.forName("com.github.merjey.scrambler.core.Core");
 		} catch (ClassNotFoundException e) {
-			fail("Class \"scrambler.core.Core\" not found.");
+			fail("Class \"com.github.merjey.scrambler.core.Core\" not found.");
 		}
         try {
 			f = core.getDeclaredField("maxpiece");
 			f.setAccessible(true);
-	        f.set(int.class, maxL);
+	        f.set(int.class, MAXL);
 		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
 			fail("Can't take access to required field.");
 		}
@@ -39,7 +39,7 @@ public class ScramblerTest {
     public void prepareData() {
         data.clear();
         Random rnd = new Random();
-        for (int i = 0; i < dataN; i++) {data.add(rnd.nextInt(256));}
+        for (int i = 0; i < DATAN; i++) {data.add(rnd.nextInt(256));}
     }
 	
 	@SuppressWarnings("unchecked")
@@ -52,10 +52,10 @@ public class ScramblerTest {
 			unshuffle.setAccessible(true);
 			List<Integer> a = new ArrayList<>();
 			a.addAll(data);
-			data = (ArrayList<Integer>) shuffle.invoke(null, data, rndKey);
+			data = (ArrayList<Integer>) shuffle.invoke(null, data, RNDKEY);
 			List<Integer> b = new ArrayList<>();
 			b.addAll(data);
-			data = (ArrayList<Integer>) unshuffle.invoke(null, data, rndKey);
+			data = (ArrayList<Integer>) unshuffle.invoke(null, data, RNDKEY);
 			assertTrue(data.equals(a));
 			assertFalse(data.equals(b));
 		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
@@ -73,12 +73,12 @@ public class ScramblerTest {
 			unstuffing.setAccessible(true);
 			List<Integer> a = new ArrayList<>();
 			a.addAll(data);
-			data = (ArrayList<Integer>) stuffing.invoke(null, data, rndKey, incl);
+			data = (ArrayList<Integer>) stuffing.invoke(null, data, RNDKEY, INCL);
 			List<Integer> b = new ArrayList<>();
 			b.addAll(data);
-			data = (ArrayList<Integer>) unstuffing.invoke(null, data, rndKey, incl);
+			data = (ArrayList<Integer>) unstuffing.invoke(null, data, RNDKEY, INCL);
 			assertTrue(data.equals(a));
-			assertTrue(b.size() == a.size() + incl);
+			assertTrue(b.size() == a.size() + INCL);
 		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			fail("Can't take access to required method.");
 		}
